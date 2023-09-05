@@ -10,7 +10,18 @@ const AddUser = (props) => {
 
     const addUserHandle = (e) => {
     e.preventDefault();
+
+    //trim method extra spaces ko htta dega.
+    if(enteredUsername.trim().length === 0 || enteredAge.trim().length === 0){
+        //simply return
+        return;
+    }
+    if(+enteredAge < 1){
+        return;
+    }
     console.log( enteredUsername, enteredAge);
+    setEnteredUsername('');
+    setEnteredAge('');
     }
 
     const usernameChangeHandler = (event) => {
@@ -24,9 +35,9 @@ const AddUser = (props) => {
     <Card className ={classes.input}>
     <form onSubmit={addUserHandle}>
         <label htmlFor='username'>Username</label>
-        <input id='username' type='text' onChange={usernameChangeHandler}/>
+        <input id='username' type='text' value={enteredUsername} onChange={usernameChangeHandler}/>
         <label htmlFor='age'>Age (years)</label>
-        <input id='username' type='number' onChange={ageChangeHandler}/>
+        <input id='username' type='number' value={enteredAge} onChange={ageChangeHandler}/>
 
         <Button type='submit'>Add User</Button>
     </form>
